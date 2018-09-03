@@ -14,7 +14,7 @@ namespace PostnordChangeNotifier
             {
                 TrackingId = trackingId
             };
-            notifier.Watch(5);
+            notifier.Watch(10);
             
             while (Console.ReadLine() != ":q")
             {
@@ -31,7 +31,7 @@ namespace PostnordChangeNotifier
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.Write("Please enter tracking ID: ");
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                input = Console.ReadLine();
+                input = Console.ReadLine().Trim();
                 Console.Clear();
             }
             Console.ForegroundColor = ConsoleColor.White;

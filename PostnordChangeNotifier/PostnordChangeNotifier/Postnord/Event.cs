@@ -12,7 +12,7 @@ namespace PostnordChangeNotifier.Postnord
 
         public override string ToString()
         {
-            return $"{Time.ToLongDateString()} @ {Location}: {Description}";
+            return $"{Time.ToShortDateString()} {Time.ToShortTimeString()} @ {Location}: {Description}";
         }
     }
 }

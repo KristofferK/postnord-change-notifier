@@ -17,6 +17,7 @@ namespace PostnordChangeNotifier.Postnord
         public override string ToString()
         {
             return $"{ServiceName} - {Status}\n" +
+                $"ETA: {EstimatedTimeOfArrival.ToLongDateString()} {EstimatedTimeOfArrival.ToLongTimeString()}\n" +
                 $"From {Consignor} to {Consignee}\n" +
                 "\nEvents:\n" +
                 String.Join('\n', Events.Select(e => e.ToString()).ToArray());
@@ -33,6 +34,7 @@ namespace PostnordChangeNotifier.Postnord
             }
 
             return
+                EstimatedTimeOfArrival == response.EstimatedTimeOfArrival &&
                 Events.Count() == response.Events.Count() &&
                 Consignor.Equals(response.Consignor) &&
                 Consignee.Equals(response.Consignee) &&
