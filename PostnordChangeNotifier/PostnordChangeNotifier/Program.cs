@@ -1,5 +1,7 @@
-﻿using System;
+﻿using PostnordChangeNotifier.Postnord;
+using System;
 using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace PostnordChangeNotifier
 {
@@ -8,7 +10,16 @@ namespace PostnordChangeNotifier
         static void Main(string[] args)
         {
             var trackingId = GetTrackingIdFromUser();
-            Console.WriteLine("Good");
+            var notifier = new ChangeNotifier(new PostnordApi())
+            {
+                TrackingId = trackingId
+            };
+            notifier.Watch();
+            
+            while (Console.ReadLine() != ":q")
+            {
+                Console.WriteLine("Type :q to exit");
+            }
         }
 
         private static string GetTrackingIdFromUser()
