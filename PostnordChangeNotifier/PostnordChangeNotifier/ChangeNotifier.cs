@@ -40,7 +40,8 @@ namespace PostnordChangeNotifier
                         Console.ForegroundColor = ConsoleColor.Cyan;
                         Console.Write("[" + DateTime.Now.ToLongTimeString() + "] ");
                         Console.ForegroundColor = ConsoleColor.Magenta;
-                        Console.WriteLine("Changed");
+                        Console.WriteLine("Changes found");
+                        Console.WriteLine(trackingInformation);
                         Console.Title = "(CHANGED) Parcel from " + trackingInformation.Consignor.Name;
                         Console.Beep();
                     }

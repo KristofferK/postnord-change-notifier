@@ -10,6 +10,11 @@ namespace PostnordChangeNotifier.Postnord
         public string Body { get; set; }
         public string EstimatedTimeOfArrival { get; set; }
 
+        public override string ToString()
+        {
+            return Header;
+        }
+
         public override bool Equals(object obj)
         {
             var status = obj as Status;

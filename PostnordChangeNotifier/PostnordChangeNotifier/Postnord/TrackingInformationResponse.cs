@@ -14,6 +14,15 @@ namespace PostnordChangeNotifier.Postnord
         public Status Status { get; set; }
         public IEnumerable<Event> Events { get; set; }
 
+        public override string ToString()
+        {
+            return $"{ServiceName} - {Status}\n" +
+                $"From {Consignor} to {Consignee}\n" +
+                "\nEvents:\n" +
+                String.Join('\n', Events.Select(e => e.ToString()).ToArray());
+
+        }
+
         public override bool Equals(object obj)
         {
             var response = obj as TrackingInformationResponse;
