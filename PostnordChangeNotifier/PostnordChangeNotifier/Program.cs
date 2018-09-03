@@ -14,7 +14,7 @@ namespace PostnordChangeNotifier
             {
                 TrackingId = trackingId
             };
-            notifier.Watch();
+            notifier.Watch(5);
             
             while (Console.ReadLine() != ":q")
             {

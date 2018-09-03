@@ -17,7 +17,7 @@ namespace PostnordChangeNotifier
             this.postnord = postnord;
         }
 
-        public void Watch()
+        public void Watch(int checkFrequency)
         {
             new Thread(() =>
             {
@@ -44,7 +44,7 @@ namespace PostnordChangeNotifier
                         Console.Title = "(CHANGED) Parcel from " + trackingInformation.Consignor.Name;
                         Console.Beep();
                     }
-                    Thread.Sleep(5000);
+                    Thread.Sleep(checkFrequency * 60 * 1000);
                 }
             })
             {
