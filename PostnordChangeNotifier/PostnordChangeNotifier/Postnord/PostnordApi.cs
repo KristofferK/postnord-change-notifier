@@ -25,7 +25,7 @@ namespace PostnordChangeNotifier.Postnord
                 Consignee = GetConsignee(shipment),
                 Consignor = GetConsignor(shipment),
                 Events = GetEvents(shipment),
-                EstimatedTimeOfArrival = (DateTime)shipment["estimatedTimeOfArrival"],
+                EstimatedTimeOfArrival = shipment["estimatedTimeOfArrival"].ToObject<DateTime?>() ?? new DateTime(1, 1, 1),
                 ServiceName = shipment["service"]["name"].ToString(),
                 Status = GetStatus(shipment),
             };
