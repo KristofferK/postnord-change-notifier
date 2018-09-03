@@ -22,24 +22,34 @@ namespace PostnordChangeNotifier
             new Thread(() =>
             {
                 Console.WriteLine("Watching " + TrackingId);
-                var trackingInformation = postnord.GetTrackingInformationSynchronous(TrackingId);
-                if (trackingInformation.Equals(lastTrackingInformationResponse))
+                Console.Title = "Watching " + TrackingId;
+                while (true)
                 {
-                    Console.ForegroundColor = ConsoleColor.Cyan;
-                    Console.Write("["+DateTime.Now.ToShortTimeString()+"] ");
-                    Console.ForegroundColor = ConsoleColor.Gray;
-                    Console.WriteLine("No changes");
+                    var trackingInformation = postnord.GetTrackingInformationSynchronous(TrackingId);
+                    if (trackingInformation.Equals(lastTrackingInformationResponse))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.Write("[" + DateTime.Now.ToLongTimeString() + "] ");
+                        Console.ForegroundColor = ConsoleColor.Gray;
+                        Console.WriteLine("No changes");
+                        Console.Title = "Parcel from " + trackingInformation.Consignor.Name;
+                    }
+                    else
+                    {
+                        lastTrackingInformationResponse = trackingInformation;
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.Write("[" + DateTime.Now.ToLongTimeString() + "] ");
+                        Console.ForegroundColor = ConsoleColor.Magenta;
+                        Console.WriteLine("Changed");
+                        Console.Title = "(CHANGED) Parcel from " + trackingInformation.Consignor.Name;
+                        Console.Beep();
+                    }
+                    Thread.Sleep(5000);
                 }
-                else
-                {
-                    lastTrackingInformationResponse = trackingInformation;
-                    Console.ForegroundColor = ConsoleColor.Cyan;
-                    Console.Write("[" + DateTime.Now.ToShortTimeString() + "] ");
-                    Console.ForegroundColor = ConsoleColor.Magenta;
-                    Console.WriteLine("Changed");
-                    Console.Beep();
-                }
-            }).Start();
+            })
+            {
+                IsBackground = true
+            }.Start();
         }
     }
 }

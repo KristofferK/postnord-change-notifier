@@ -9,5 +9,19 @@ namespace PostnordChangeNotifier.Postnord
         public string Header { get; set; }
         public string Body { get; set; }
         public string EstimatedTimeOfArrival { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            var status = obj as Status;
+            if (status == null)
+            {
+                return false;
+            }
+
+            return
+                Header == status.Header &&
+                Body == status.Body &&
+                EstimatedTimeOfArrival == status.EstimatedTimeOfArrival;
+        }
     }
 }
